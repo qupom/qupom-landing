@@ -90,13 +90,27 @@
     }
 
     .logo {
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      display: inline-flex;
+      align-items: center;
+      line-height: 0;
+      flex-shrink: 0;
     }
 
-    .logo span {
-      color: var(--color-primary);
+    .logo__img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
+
+    /* PNG branco → laranja marca no fundo claro */
+    .logo__img--nav {
+      filter: brightness(0) saturate(100%) invert(58%) sepia(92%) saturate(1200%)
+        hue-rotate(347deg) brightness(98%) contrast(92%);
+      transition: opacity var(--transition), filter var(--transition);
+    }
+
+    .logo:hover .logo__img--nav {
+      opacity: 0.9;
     }
 
     .nav__links {
@@ -672,12 +686,8 @@
       margin-bottom: 2rem;
     }
 
-    .footer .logo {
-      color: #fff;
-    }
-
-    .footer .logo span {
-      color: var(--color-primary);
+    .footer .logo__img--footer {
+      height: 30px;
     }
 
     .footer__links {
@@ -759,7 +769,9 @@
   <header class="nav" id="top">
     <div class="container">
       <div class="nav__inner">
-        <a href="#top" class="logo" aria-label="Qupom — Início"><span>Q</span>upom</a>
+        <a href="#top" class="logo" aria-label="Qupom — Início">
+          <img class="logo__img logo__img--nav" src="assets/logo.png" alt="" width="140" height="34" decoding="async" />
+        </a>
         <nav class="nav__links" aria-label="Principal">
           <a href="#para-si">Para si</a>
           <a href="#para-negocio">Para o seu negócio</a>
@@ -952,7 +964,9 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__top">
-        <a href="#top" class="logo" aria-label="Qupom — Início"><span>Q</span>upom</a>
+        <a href="#top" class="logo" aria-label="Qupom — Início">
+          <img class="logo__img logo__img--footer" src="assets/logo.png" alt="" width="130" height="30" decoding="async" />
+        </a>
         <nav class="footer__links" aria-label="Rodapé">
           <a href="#">Política de Privacidade</a>
           <span aria-hidden="true">|</span>
