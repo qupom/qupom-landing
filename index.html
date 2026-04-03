@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qupom — Os melhores descontos perto de si</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #F28C38;
+      --color-gradient-end: #F5B942;
+      --bg: #FFFFFF;
+      --text: #1A1A1A;
+      --text-muted: #666666;
+      --border: #E5E5E5;
+      --footer-bg: #1A1A1A;
+      --section-tint: #FFF8F3;
+      --gradient: linear-gradient(135deg, #F28C38, #F5B942);
+      --shadow-nav: 0 4px 24px rgba(26, 26, 26, 0.08);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --transition: 0.25s ease;
+      --max: 1120px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+    }
+
+    /* Navbar */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      transition: box-shadow var(--transition);
+    }
+
+    .nav.is-scrolled {
+      box-shadow: var(--shadow-nav);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--color-primary);
+    }
+
+    .nav__links {
+      display: none;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    .nav__links a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: color var(--transition);
+    }
+
+    .nav__links a:hover {
+      color: var(--color-primary);
+    }
+
+    .nav__cta {
+      display: none;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--color-primary);
+      border-radius: 999px;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(242, 140, 56, 0.35);
+      background: #e07d2a;
+    }
+
+    .nav__toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      color: var(--text);
+      transition: background var(--transition);
+    }
+
+    .nav__toggle:hover {
+      background: rgba(242, 140, 56, 0.1);
+    }
+
+    .nav__toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav__panel {
+      display: none;
+      padding-bottom: 1rem;
+    }
+
+    .nav__panel.is-open {
+      display: block;
+    }
+
+    .nav__panel-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 0.5rem 0 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav__panel a {
+      font-weight: 500;
+      padding: 0.5rem 0;
+      color: var(--text);
+    }
+
+    .nav__panel .btn-download {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .nav__links,
+      .nav__cta {
+        display: flex;
+      }
+
+      .nav__toggle {
+        display: none;
+      }
+
+      .nav__panel {
+        display: none !important;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      padding: 2.5rem 0 3rem;
+      overflow: hidden;
+    }
+
+    .hero__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero__content {
+      text-align: center;
+      max-width: 36rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.875rem, 5vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .hero__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+
+    .store-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: stretch;
+      width: 100%;
+      max-width: 20rem;
+      margin-inline: auto;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .store-btn--apple {
+      background: #1A1A1A;
+      color: #fff;
+    }
+
+    .store-btn--apple:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26, 26, 26, 0.25);
+    }
+
+    .store-btn--google {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .store-btn--google:hover {
+      transform: translateY(-2px);
+      border-color: #ccc;
+      box-shadow: 0 4px 16px rgba(26, 26, 26, 0.08);
+    }
+
+    .store-btn svg {
+      flex-shrink: 0;
+    }
+
+    .hero__mockup-wrap {
+      width: 100%;
+      max-width: 280px;
+      perspective: 800px;
+    }
+
+    .phone-mockup {
+      aspect-ratio: 9 / 18.5;
+      border-radius: 36px;
+      background: var(--gradient);
+      box-shadow:
+        0 24px 48px rgba(242, 140, 56, 0.35),
+        inset 0 0 0 3px rgba(255, 255, 255, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-mockup::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .phone-mockup__notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 24px;
+      background: rgba(26, 26, 26, 0.2);
+      border-radius: 12px;
+      z-index: 2;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding: 4rem 0 5rem;
+      }
+
+      .hero__grid {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+      }
+
+      .hero__content {
+        text-align: left;
+        margin-inline: 0;
+      }
+
+      .store-btns {
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: none;
+        margin-inline: 0;
+      }
+
+      .store-btn {
+        min-width: 168px;
+      }
+
+      .hero__mockup-wrap {
+        max-width: 300px;
+        flex-shrink: 0;
+      }
+    }
+
+    /* Sections common */
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.0625rem;
+      max-width: 36rem;
+      margin-inline: auto;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Como funciona */
+    .steps {
+      padding: 4rem 0;
+      background: var(--section-tint);
+    }
+
+    .steps__grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .step-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: 0 4px 24px rgba(26, 26, 26, 0.06);
+      border: 1px solid rgba(242, 140, 56, 0.12);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(242, 140, 56, 0.15);
+    }
+
+    .step-card__icon {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-card__num {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-card p {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    @media (min-width: 768px) {
+      .steps__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Consumidores features */
+    .features-consumer {
+      padding: 4rem 0;
+      background: var(--bg);
+    }
+
+    .features-consumer__grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .feature-box {
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: #fafafa;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+
+    .feature-box:hover {
+      border-color: rgba(242, 140, 56, 0.35);
+      background: #fff;
+      transform: translateY(-2px);
+    }
+
+    .feature-box__emoji {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-box h3 {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-box p {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    @media (min-width: 768px) {
+      .features-consumer__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Comerciantes */
+    .merchants {
+      padding: 4rem 0;
+      background: var(--gradient);
+      color: #fff;
+    }
+
+    .merchants .section-title {
+      color: #fff;
+    }
+
+    .merchants .section-sub {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .merchants__grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .merchant-feat {
+      text-align: center;
+      padding: 1.25rem;
+    }
+
+    .merchant-feat__icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .merchant-feat h3 {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .merchant-feat p {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      opacity: 0.92;
+    }
+
+    .btn-merchants {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1.75rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      background: #fff;
+      border-radius: 999px;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .btn-merchants:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .merchants__cta-wrap {
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .merchants__grid {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: start;
+      }
+    }
+
+    /* Download block */
+    .download-block {
+      padding: 4rem 0;
+      background: var(--section-tint);
+      text-align: center;
+    }
+
+    .download-block .store-btns {
+      margin-inline: auto;
+    }
+
+    @media (min-width: 768px) {
+      .download-block .store-btns {
+        flex-direction: row;
+        justify-content: center;
+        max-width: none;
+      }
+    }
+
+    /* Contact */
+    .contact {
+      padding: 4rem 0;
+      background: var(--bg);
+    }
+
+    .contact__form {
+      max-width: 32rem;
+      margin-inline: auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(242, 140, 56, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--color-primary);
+      border-radius: 12px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .btn-submit:hover {
+      background: #e07d2a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(242, 140, 56, 0.35);
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--footer-bg);
+      color: rgba(255, 255, 255, 0.85);
+      padding: 3rem 0 2rem;
+    }
+
+    .footer__top {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer .logo {
+      color: #fff;
+    }
+
+    .footer .logo span {
+      color: var(--color-primary);
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      font-size: 0.9375rem;
+    }
+
+    .footer__links a {
+      transition: color var(--transition);
+    }
+
+    .footer__links a:hover {
+      color: #fff;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer__social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .footer__social a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .footer__social svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .footer__bottom {
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.55);
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer__top {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .footer__bottom {
+        text-align: left;
+      }
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" id="top">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#top" class="logo" aria-label="Qupom — Início"><span>Q</span>upom</a>
+        <nav class="nav__links" aria-label="Principal">
+          <a href="#para-si">Para si</a>
+          <a href="#para-negocio">Para o seu negócio</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <a class="nav__cta btn-download" href="#download">Download</a>
+        <button type="button" class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navPanel" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path id="iconMenu" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div class="nav__panel" id="navPanel" hidden>
+        <div class="nav__panel-inner">
+          <a href="#para-si">Para si</a>
+          <a href="#para-negocio">Para o seu negócio</a>
+          <a href="#contacto">Contacto</a>
+          <a class="btn-download" href="#download">Download</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__content reveal">
+            <h1>Os melhores descontos perto de si</h1>
+            <p class="hero__sub">Descubra cupões exclusivos nos estabelecimentos da sua cidade. Poupe todos os dias com um simples toque.</p>
+            <div class="store-btns">
+              <a class="store-btn store-btn--apple" href="#" aria-label="Descarregar na App Store">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                App Store
+              </a>
+              <a class="store-btn store-btn--google" href="#" aria-label="Descarregar no Google Play">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="#EA4335" d="M3.6 1.2c-.3.3-.5.7-.5 1.2v19.2c0 .5.2.9.5 1.2l10.8-10.8L3.6 1.2z"/>
+                  <path fill="#FBBC04" d="M14.4 12l3.1-3.1L6.1 1.2C5.6.8 5 1 4.6 1.4l9.8 10.6z"/>
+                  <path fill="#34A853" d="M14.4 12l-9.8 10.6c.4.4 1 .5 1.5.1l12.2-7-4-3.7z"/>
+                  <path fill="#4285F4" d="M21.9 10.3l-.1-.1-4.4 2.6 4.4 4.1c.6-.3 1-.9 1-1.6V12c0-.3-.1-.5-.2-.7z"/>
+                </svg>
+                Google Play
+              </a>
+            </div>
+          </div>
+          <div class="hero__mockup-wrap reveal reveal-delay-1">
+            <div class="phone-mockup" role="img" aria-label="Mockup da app Qupom no telemóvel">
+              <div class="phone-mockup__notch" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps" id="para-si">
+      <div class="container">
+        <h2 class="section-title reveal">Poupe em 3 passos simples</h2>
+        <div class="steps__grid">
+          <article class="step-card reveal">
+            <div class="step-card__icon" aria-hidden="true">🔍</div>
+            <span class="step-card__num">Passo 1</span>
+            <h3>Descubra</h3>
+            <p>Encontre cupões nos estabelecimentos perto de si</p>
+          </article>
+          <article class="step-card reveal reveal-delay-1">
+            <div class="step-card__icon" aria-hidden="true">📱</div>
+            <span class="step-card__num">Passo 2</span>
+            <h3>Escolha</h3>
+            <p>Selecione o desconto que mais lhe interessa</p>
+          </article>
+          <article class="step-card reveal reveal-delay-2">
+            <div class="step-card__icon" aria-hidden="true">✅</div>
+            <span class="step-card__num">Passo 3</span>
+            <h3>Poupe</h3>
+            <p>Mostre o QR code e o desconto é aplicado na hora</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-consumer">
+      <div class="container">
+        <h2 class="section-title reveal">Descubra um novo mundo de descontos</h2>
+        <div class="features-consumer__grid">
+          <article class="feature-box reveal">
+            <div class="feature-box__emoji" aria-hidden="true">📍</div>
+            <h3>Cupões por proximidade</h3>
+            <p>Veja os melhores descontos a metros de si</p>
+          </article>
+          <article class="feature-box reveal reveal-delay-1">
+            <div class="feature-box__emoji" aria-hidden="true">⭐</div>
+            <h3>Estabelecimentos favoritos</h3>
+            <p>Guarde os seus locais preferidos e seja notificado de novas ofertas</p>
+          </article>
+          <article class="feature-box reveal reveal-delay-2">
+            <div class="feature-box__emoji" aria-hidden="true">💰</div>
+            <h3>Acompanhe as suas poupanças</h3>
+            <p>Veja quanto já poupou em cada mês</p>
+          </article>
+          <article class="feature-box reveal reveal-delay-3">
+            <div class="feature-box__emoji" aria-hidden="true">🎁</div>
+            <h3>Ofertas especiais</h3>
+            <p>Aceda a promoções exclusivas que não encontra em mais lado nenhum</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="merchants" id="para-negocio">
+      <div class="container">
+        <h2 class="section-title reveal">Coloque o seu negócio no mapa</h2>
+        <p class="section-sub reveal">Atraia novos clientes e fidelize os existentes com cupões personalizados</p>
+        <div class="merchants__grid">
+          <div class="merchant-feat reveal">
+            <div class="merchant-feat__icon" aria-hidden="true">🏪</div>
+            <h3>Crie cupões em minutos</h3>
+            <p>Interface simples e intuitiva para gerir os seus descontos</p>
+          </div>
+          <div class="merchant-feat reveal reveal-delay-1">
+            <div class="merchant-feat__icon" aria-hidden="true">📊</div>
+            <h3>Acompanhe os resultados</h3>
+            <p>Veja quantas pessoas usaram os seus cupões em tempo real</p>
+          </div>
+          <div class="merchant-feat reveal reveal-delay-2">
+            <div class="merchant-feat__icon" aria-hidden="true">🎨</div>
+            <h3>Personalize ao seu gosto</h3>
+            <p>Escolha cores, defina limites e validades</p>
+          </div>
+        </div>
+        <div class="merchants__cta-wrap reveal">
+          <a class="btn-merchants" href="#contacto">Quero o meu negócio no Qupom</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-block" id="download">
+      <div class="container">
+        <h2 class="section-title reveal">Comece a poupar hoje</h2>
+        <p class="section-sub reveal">Disponível para iOS e Android. Grátis.</p>
+        <div class="store-btns reveal">
+          <a class="store-btn store-btn--apple" href="#" aria-label="Descarregar na App Store">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            App Store
+          </a>
+          <a class="store-btn store-btn--google" href="#" aria-label="Descarregar no Google Play">
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#EA4335" d="M3.6 1.2c-.3.3-.5.7-.5 1.2v19.2c0 .5.2.9.5 1.2l10.8-10.8L3.6 1.2z"/>
+              <path fill="#FBBC04" d="M14.4 12l3.1-3.1L6.1 1.2C5.6.8 5 1 4.6 1.4l9.8 10.6z"/>
+              <path fill="#34A853" d="M14.4 12l-9.8 10.6c.4.4 1 .5 1.5.1l12.2-7-4-3.7z"/>
+              <path fill="#4285F4" d="M21.9 10.3l-.1-.1-4.4 2.6 4.4 4.1c.6-.3 1-.9 1-1.6V12c0-.3-.1-.5-.2-.7z"/>
+            </svg>
+            Google Play
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="container">
+        <h2 class="section-title reveal">Quero o meu negócio no Qupom</h2>
+        <form class="contact__form reveal" action="#" method="post">
+          <div class="form-group">
+            <label for="business">Nome do negócio</label>
+            <input type="text" id="business" name="business" autocomplete="organization" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefone</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Enviar</button>
+          <p class="form-note">Entraremos em contacto em 24 horas</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <a href="#top" class="logo" aria-label="Qupom — Início"><span>Q</span>upom</a>
+        <nav class="footer__links" aria-label="Rodapé">
+          <a href="#">Política de Privacidade</a>
+          <span aria-hidden="true">|</span>
+          <a href="#">Termos e Condições</a>
+          <span aria-hidden="true">|</span>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.858v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <p class="footer__bottom">© 2026 Qupom. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.querySelector(".nav");
+      var toggle = document.getElementById("navToggle");
+      var panel = document.getElementById("navPanel");
+
+      function setScrolled() {
+        if (window.scrollY > 8) {
+          nav.classList.add("is-scrolled");
+        } else {
+          nav.classList.remove("is-scrolled");
+        }
+      }
+
+      window.addEventListener("scroll", setScrolled, { passive: true });
+      setScrolled();
+
+      function closeMenu() {
+        panel.classList.remove("is-open");
+        panel.setAttribute("hidden", "");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Abrir menu");
+      }
+
+      function openMenu() {
+        panel.classList.add("is-open");
+        panel.removeAttribute("hidden");
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Fechar menu");
+      }
+
+      toggle.addEventListener("click", function () {
+        if (panel.classList.contains("is-open")) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      panel.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          if (window.matchMedia("(max-width: 767px)").matches) {
+            closeMenu();
+          }
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener("click", function (e) {
+          var id = anchor.getAttribute("href");
+          if (id === "#" || id.length < 2) return;
+          var target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!prefersReduced) {
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+              }
+            });
+          },
+          { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+        );
+
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          observer.observe(el);
+        });
+      } else {
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
