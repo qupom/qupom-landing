@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qupom — Os melhores descontos perto de si</title>
+  <title>Qupom — Os melhores descontos perto de ti</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -90,13 +90,27 @@
     }
 
     .logo {
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      display: inline-flex;
+      align-items: center;
+      line-height: 0;
+      flex-shrink: 0;
     }
 
-    .logo span {
-      color: var(--color-primary);
+    .logo__img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
+
+    /* PNG branco → laranja marca no fundo claro */
+    .logo__img--nav {
+      filter: brightness(0) saturate(100%) invert(58%) sepia(92%) saturate(1200%)
+        hue-rotate(347deg) brightness(98%) contrast(92%);
+      transition: opacity var(--transition), filter var(--transition);
+    }
+
+    .logo:hover .logo__img--nav {
+      opacity: 0.9;
     }
 
     .nav__links {
@@ -289,36 +303,45 @@
       perspective: 800px;
     }
 
+    /* Moldura fina (bezel) para aspeto próximo de telemóvel real */
     .phone-mockup {
-      aspect-ratio: 9 / 18.5;
-      border-radius: 36px;
-      background: var(--gradient);
+      aspect-ratio: 9 / 19;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #2a2a2a 0%, #0d0d0d 40%, #1a1a1a 100%);
       box-shadow:
-        0 24px 48px rgba(242, 140, 56, 0.35),
-        inset 0 0 0 3px rgba(255, 255, 255, 0.25);
+        0 2px 0 rgba(255, 255, 255, 0.06) inset,
+        0 28px 56px rgba(0, 0, 0, 0.28),
+        0 8px 16px rgba(0, 0, 0, 0.12);
       position: relative;
       overflow: hidden;
     }
 
-    .phone-mockup::after {
-      content: "";
+    .phone-mockup__screen {
       position: absolute;
-      inset: 12px;
-      border-radius: 28px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      inset: 5px;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35) inset;
+    }
+
+    .phone-mockup__screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .phone-mockup__notch {
       position: absolute;
-      top: 10px;
+      top: 8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 90px;
-      height: 24px;
-      background: rgba(26, 26, 26, 0.2);
-      border-radius: 12px;
+      width: min(36%, 72px);
+      height: 19px;
+      background: #0a0a0a;
+      border-radius: 999px;
       z-index: 2;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
     }
 
     @media (min-width: 768px) {
@@ -393,59 +416,287 @@
     /* Como funciona */
     .steps {
       padding: 4rem 0;
-      background: var(--section-tint);
+      background: #fff8f3;
     }
 
-    .steps__grid {
-      display: grid;
-      gap: 1.25rem;
-    }
-
-    .step-card {
-      background: #fff;
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      box-shadow: 0 4px 24px rgba(26, 26, 26, 0.06);
-      border: 1px solid rgba(242, 140, 56, 0.12);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .step-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(242, 140, 56, 0.15);
-    }
-
-    .step-card__icon {
-      font-size: 2rem;
-      line-height: 1;
-      margin-bottom: 0.75rem;
-    }
-
-    .step-card__num {
-      display: inline-block;
+    .steps__eyebrow {
       font-size: 0.75rem;
       font-weight: 700;
-      color: var(--color-primary);
+      color: #f28c38;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.14em;
+      text-align: center;
       margin-bottom: 0.5rem;
     }
 
-    .step-card h3 {
+    .steps__heading {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .steps__flow {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1.25rem;
+    }
+
+    .step-how {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 22rem;
+      margin-inline: auto;
+    }
+
+    .step-how__mockup {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+    }
+
+    .step-how__mockup .phone-mockup {
+      width: 100%;
+    }
+
+    .step-how__badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      background: #f28c38;
+      color: #fff;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 999px;
+      margin-bottom: 0.65rem;
+    }
+
+    .step-how__title {
       font-size: 1.125rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
 
-    .step-card p {
+    .step-how__desc {
       font-size: 0.9375rem;
       color: var(--text-muted);
       line-height: 1.55;
     }
 
+    .steps__arrow {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f28c38;
+      padding: 0.15rem 0;
+    }
+
+    .steps__arrow svg {
+      width: 28px;
+      height: 28px;
+      display: block;
+      transform: rotate(90deg);
+    }
+
     @media (min-width: 768px) {
-      .steps__grid {
-        grid-template-columns: repeat(3, 1fr);
+      .steps__flow {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .step-how {
+        flex: 1;
+        min-width: 0;
+        max-width: none;
+        margin-inline: 0;
+      }
+
+      .step-how__mockup {
+        max-width: 260px;
+      }
+
+      .steps__arrow {
+        align-self: center;
+        padding: 0 0.15rem;
+      }
+
+      .steps__arrow svg {
+        transform: none;
+      }
+    }
+
+    /* Poupanças — mockup + texto */
+    .savings-showcase {
+      background: linear-gradient(135deg, #f28c38, #f5b942);
+      padding: 5rem 0;
+      overflow: hidden;
+    }
+
+    .savings-showcase__grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .savings-showcase__mockup-col {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .savings-showcase__mockup-wrap {
+      width: 100%;
+      max-width: 260px;
+      margin-inline: auto;
+    }
+
+    .savings-showcase__mockup-wrap .phone-mockup {
+      width: 100%;
+    }
+
+    .savings-showcase__lead {
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .savings-showcase__rest {
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .savings-showcase__badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.95);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.65rem;
+    }
+
+    .savings-showcase__title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .savings-showcase__lead .savings-showcase__title {
+      margin-bottom: 0;
+    }
+
+    .savings-showcase__desc {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.92);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .savings-showcase__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    .savings-showcase__list li {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.95);
+      text-align: left;
+      max-width: 100%;
+    }
+
+    .savings-showcase__check {
+      flex-shrink: 0;
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-top: 0.15em;
+    }
+
+    .savings-showcase__check path {
+      stroke: #fff;
+    }
+
+    @media (min-width: 768px) {
+      .savings-showcase {
+        padding: 3.25rem 0 5rem;
+      }
+
+      .savings-showcase__grid {
+        display: grid;
+        grid-template-columns: minmax(220px, min(260px, 36vw)) minmax(0, min(28rem, 50%));
+        grid-template-rows: auto auto;
+        align-items: start;
+        column-gap: 2rem;
+        row-gap: 0.5rem;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .savings-showcase__lead {
+        grid-column: 2;
+        grid-row: 1;
+        margin-bottom: 0;
+        text-align: left;
+        max-width: none;
+        align-self: start;
+      }
+
+      .savings-showcase__mockup-col {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        margin-bottom: 0;
+        justify-content: flex-start;
+        align-self: start;
+        width: 100%;
+        max-width: none;
+      }
+
+      .savings-showcase__mockup-wrap {
+        width: 100%;
+        max-width: 260px;
+        margin-inline: auto 0;
+      }
+
+      .savings-showcase__rest {
+        grid-column: 2;
+        grid-row: 2;
+        text-align: left;
+        min-width: 0;
+        align-self: start;
+      }
+
+      .savings-showcase__desc {
+        margin-bottom: 0.85rem;
+      }
+
+      .savings-showcase__list {
+        align-items: flex-start;
       }
     }
 
@@ -569,6 +820,207 @@
       }
     }
 
+    /* Preços */
+    .precos {
+      background: #fff8f3;
+      padding: 5rem 0;
+    }
+
+    .precos__eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #f28c38;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .precos__heading {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .precos__lead {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      max-width: 36rem;
+      margin-inline: auto;
+      margin-bottom: 2.5rem;
+    }
+
+    .precos__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .precos-card--free {
+      width: 100%;
+      background: #fff;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .precos-card__badge {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+
+    .precos-card__badge--popular {
+      display: inline-block;
+      align-self: flex-start;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      letter-spacing: 0.06em;
+    }
+
+    .precos-card__price {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .precos-card--free .precos-card__price {
+      color: var(--text);
+    }
+
+    .precos-card__price-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .precos-card__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .precos-card__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    .precos-card--free .precos-card__list li {
+      color: #555;
+    }
+
+    .precos-card--free .precos-card__check {
+      color: #888;
+      flex-shrink: 0;
+    }
+
+    .precos-card--premium {
+      order: -1;
+      width: 100%;
+      background: linear-gradient(135deg, #f28c38, #f5b942);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    .precos-card--premium .precos-card__price {
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .precos-card--premium.is-monthly .precos-card__price {
+      margin-bottom: 1.25rem;
+    }
+
+    .precos-card--premium .precos-card__price-sub {
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .precos-toggle {
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+      padding: 4px;
+      margin-bottom: 1.25rem;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      gap: 4px;
+    }
+
+    .precos-toggle__opt {
+      flex: 1;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #fff;
+      background: transparent;
+      border-radius: 999px;
+      border: none;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .precos-toggle__opt.is-active {
+      background: #fff;
+      color: #f28c38;
+    }
+
+    .precos-premium__note {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 0.5rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.45;
+    }
+
+    .precos-card--premium .precos-card__list li {
+      color: #fff;
+    }
+
+    .precos-card--premium .precos-card__check {
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+      .precos__grid {
+        flex-direction: row;
+        align-items: stretch;
+      }
+
+      .precos-card--premium {
+        order: 0;
+      }
+
+      .precos-card--free,
+      .precos-card--premium {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+
     /* Download block */
     .download-block {
       padding: 4rem 0;
@@ -672,12 +1124,8 @@
       margin-bottom: 2rem;
     }
 
-    .footer .logo {
-      color: #fff;
-    }
-
-    .footer .logo span {
-      color: var(--color-primary);
+    .footer .logo__img--footer {
+      height: 30px;
     }
 
     .footer__links {
@@ -759,13 +1207,15 @@
   <header class="nav" id="top">
     <div class="container">
       <div class="nav__inner">
-        <a href="#top" class="logo" aria-label="Qupom — Início"><span>Q</span>upom</a>
+        <a href="#top" class="logo" aria-label="Qupom — Início">
+          <img class="logo__img" src="assets/logo_orange.png" alt="" width="140" height="36" decoding="async" style="height: 36px; width: auto;" />
+        </a>
         <nav class="nav__links" aria-label="Principal">
-          <a href="#para-si">Para si</a>
-          <a href="#para-negocio">Para o seu negócio</a>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#para-comerciantes">Para Comerciantes</a>
+          <a href="#precos">Preços</a>
           <a href="#contacto">Contacto</a>
         </nav>
-        <a class="nav__cta btn-download" href="#download">Download</a>
         <button type="button" class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navPanel" aria-label="Abrir menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             <path id="iconMenu" d="M4 6h16M4 12h16M4 18h16" />
@@ -774,22 +1224,41 @@
       </div>
       <div class="nav__panel" id="navPanel" hidden>
         <div class="nav__panel-inner">
-          <a href="#para-si">Para si</a>
-          <a href="#para-negocio">Para o seu negócio</a>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#para-comerciantes">Para Comerciantes</a>
+          <a href="#precos">Preços</a>
           <a href="#contacto">Contacto</a>
-          <a class="btn-download" href="#download">Download</a>
         </div>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero" style="position: relative; overflow: visible; background: linear-gradient(135deg, #F28C38 0%, #F5B942 100%);">
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: -14px; width: 100%; display: flex; justify-content: space-around; align-items: center; pointer-events: none;">
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+      </div>
       <div class="container">
         <div class="hero__grid">
           <div class="hero__content reveal">
-            <h1>Os melhores descontos perto de si</h1>
-            <p class="hero__sub">Descubra cupões exclusivos nos estabelecimentos da sua cidade. Poupe todos os dias com um simples toque.</p>
+            <img src="qupom-logo.png" alt="" width="200" height="80" decoding="async" style="display: block; height: 80px; width: auto; margin: 0 auto 24px;" />
+            <h1 style="color: #fff;">Os melhores descontos perto de ti</h1>
+            <p class="hero__sub" style="color: rgba(255, 255, 255, 0.85);">Descobre cupões exclusivos nos estabelecimentos da tua cidade. Poupa todos os dias com um simples toque.</p>
             <div class="store-btns">
               <a class="store-btn store-btn--apple" href="#" aria-label="Descarregar na App Store">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -810,42 +1279,139 @@
           </div>
           <div class="hero__mockup-wrap reveal reveal-delay-1">
             <div class="phone-mockup" role="img" aria-label="Mockup da app Qupom no telemóvel">
+              <div class="phone-mockup__screen">
+                <img src="assets/photo%201.jpeg" alt="" width="1080" height="2280" decoding="async" />
+              </div>
               <div class="phone-mockup__notch" aria-hidden="true"></div>
             </div>
           </div>
         </div>
       </div>
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -14px; width: 100%; display: flex; justify-content: space-around; align-items: center; pointer-events: none;">
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+        <span style="width: 28px; height: 28px; border-radius: 50%; background: #fff; flex-shrink: 0;"></span>
+      </div>
     </section>
 
-    <section class="steps" id="para-si">
+    <section class="steps" id="como-funciona" style="padding-top: calc(4rem + 30px);">
       <div class="container">
-        <h2 class="section-title reveal">Poupe em 3 passos simples</h2>
-        <div class="steps__grid">
-          <article class="step-card reveal">
-            <div class="step-card__icon" aria-hidden="true">🔍</div>
-            <span class="step-card__num">Passo 1</span>
-            <h3>Descubra</h3>
-            <p>Encontre cupões nos estabelecimentos perto de si</p>
+        <p class="steps__eyebrow reveal">Como funciona</p>
+        <h2 class="steps__heading reveal">Poupa em 3 passos simples</h2>
+        <div class="steps__flow">
+          <article class="step-how reveal">
+            <div class="step-how__mockup">
+              <div class="phone-mockup" role="img" aria-label="Passo 1 — ecrã da app">
+                <div class="phone-mockup__screen">
+                  <img src="assets/photo%202.jpeg" alt="" width="1080" height="2280" decoding="async" />
+                </div>
+                <div class="phone-mockup__notch" aria-hidden="true"></div>
+              </div>
+            </div>
+            <span class="step-how__badge">Passo 1</span>
+            <h3 class="step-how__title">Descubra</h3>
+            <p class="step-how__desc">Escolhe o cupão que mais te interessa nos estabelecimentos perto de ti</p>
           </article>
-          <article class="step-card reveal reveal-delay-1">
-            <div class="step-card__icon" aria-hidden="true">📱</div>
-            <span class="step-card__num">Passo 2</span>
-            <h3>Escolha</h3>
-            <p>Selecione o desconto que mais lhe interessa</p>
+          <div class="steps__arrow reveal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </div>
+          <article class="step-how reveal reveal-delay-1">
+            <div class="step-how__mockup">
+              <div class="phone-mockup" role="img" aria-label="Passo 2 — ecrã da app">
+                <div class="phone-mockup__screen">
+                  <img src="assets/photo%203.jpeg" alt="" width="1080" height="2280" decoding="async" />
+                </div>
+                <div class="phone-mockup__notch" aria-hidden="true"></div>
+              </div>
+            </div>
+            <span class="step-how__badge">Passo 2</span>
+            <h3 class="step-how__title">Valide</h3>
+            <p class="step-how__desc">Mostra o QR code ao comerciante e o desconto é aplicado na hora</p>
           </article>
-          <article class="step-card reveal reveal-delay-2">
-            <div class="step-card__icon" aria-hidden="true">✅</div>
-            <span class="step-card__num">Passo 3</span>
-            <h3>Poupe</h3>
-            <p>Mostre o QR code e o desconto é aplicado na hora</p>
+          <div class="steps__arrow reveal reveal-delay-1" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </div>
+          <article class="step-how reveal reveal-delay-2">
+            <div class="step-how__mockup">
+              <div class="phone-mockup" role="img" aria-label="Passo 3 — ecrã da app">
+                <div class="phone-mockup__screen">
+                  <img src="assets/photo%204.jpeg" alt="" width="1080" height="2280" decoding="async" />
+                </div>
+                <div class="phone-mockup__notch" aria-hidden="true"></div>
+              </div>
+            </div>
+            <span class="step-how__badge">Passo 3</span>
+            <h3 class="step-how__title">Poupe</h3>
+            <p class="step-how__desc">Vê quanto poupas-te e acumula descontos todos os dias</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="savings-showcase" aria-labelledby="savings-showcase-title">
+      <div class="container savings-showcase__grid">
+        <div class="savings-showcase__lead reveal">
+          <p class="savings-showcase__badge">As tuas poupanças</p>
+          <h2 class="savings-showcase__title" id="savings-showcase-title">Vê quanto já poupas-te</h2>
+        </div>
+        <div class="savings-showcase__mockup-col reveal reveal-delay-1">
+          <div class="savings-showcase__mockup-wrap">
+            <div class="phone-mockup" role="img" aria-label="Ecrã da app Qupom com as poupanças">
+              <div class="phone-mockup__screen">
+                <img src="photo5.jpeg" alt="" width="1080" height="2280" decoding="async" />
+              </div>
+              <div class="phone-mockup__notch" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+        <div class="savings-showcase__rest reveal reveal-delay-2">
+          <p class="savings-showcase__desc">
+            Acompanha todas as tuas poupanças em tempo real. O Qupom regista cada desconto utilizado para que saibas sempre quanto poupas-te.
+          </p>
+          <ul class="savings-showcase__list">
+            <li>
+              <svg class="savings-showcase__check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M20 6L9 17l-5-5" stroke="#F28C38" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span>Total poupado sempre visível</span>
+            </li>
+            <li>
+              <svg class="savings-showcase__check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M20 6L9 17l-5-5" stroke="#F28C38" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span>Histórico detalhado por mês</span>
+            </li>
+            <li>
+              <svg class="savings-showcase__check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M20 6L9 17l-5-5" stroke="#F28C38" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span>Registo de todos os cupões utilizados</span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
     <section class="features-consumer">
       <div class="container">
-        <h2 class="section-title reveal">Descubra um novo mundo de descontos</h2>
+        <h2 class="section-title reveal">Descobre um novo mundo de descontos</h2>
         <div class="features-consumer__grid">
           <article class="feature-box reveal">
             <div class="feature-box__emoji" aria-hidden="true">📍</div>
@@ -871,7 +1437,7 @@
       </div>
     </section>
 
-    <section class="merchants" id="para-negocio">
+    <section class="merchants" id="para-comerciantes">
       <div class="container">
         <h2 class="section-title reveal">Coloque o seu negócio no mapa</h2>
         <p class="section-sub reveal">Atraia novos clientes e fidelize os existentes com cupões personalizados</p>
@@ -894,6 +1460,41 @@
         </div>
         <div class="merchants__cta-wrap reveal">
           <a class="btn-merchants" href="#contacto">Quero o meu negócio no Qupom</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="precos" id="precos" aria-labelledby="precos-heading">
+      <div class="container">
+        <p class="precos__eyebrow reveal">PREÇOS</p>
+        <h2 class="precos__heading reveal" id="precos-heading">Simples e transparente</h2>
+        <p class="precos__lead reveal">Começa grátis. Sem compromissos.</p>
+        <div class="precos__grid">
+          <article class="precos-card precos-card--free reveal">
+            <span class="precos-card__badge">GRÁTIS</span>
+            <p class="precos-card__price">0€</p>
+            <p class="precos-card__price-sub">Para sempre</p>
+            <ul class="precos-card__list">
+              <li><span class="precos-card__check" aria-hidden="true">✓</span> 3 cupões por mês</li>
+              <li><span class="precos-card__check" aria-hidden="true">✓</span> Acesso a todos os estabelecimentos</li>
+              <li><span class="precos-card__check" aria-hidden="true">✓</span> Histórico de poupanças</li>
+            </ul>
+          </article>
+          <article class="precos-card precos-card--premium is-monthly reveal reveal-delay-1">
+            <span class="precos-card__badge precos-card__badge--popular">MAIS POPULAR</span>
+            <div class="precos-toggle" role="group" aria-label="Período de faturação">
+              <button type="button" class="precos-toggle__opt is-active" id="precosToggleMonthly" data-period="monthly" aria-pressed="true">Mensal</button>
+              <button type="button" class="precos-toggle__opt" id="precosToggleAnnual" data-period="annual" aria-pressed="false">Anual</button>
+            </div>
+            <p class="precos-card__price" id="precosPremiumPrice">1,99€/mês</p>
+            <p class="precos-premium__note" id="precosPremiumNote" hidden>Equivale a 1,67€/mês — poupa 16%</p>
+            <ul class="precos-card__list">
+              <li><span class="precos-card__check" aria-hidden="true">✓</span> Cupões ilimitados</li>
+              <li><span class="precos-card__check" aria-hidden="true">✓</span> Acesso a todos os estabelecimentos</li>
+              <li><span class="precos-card__check" aria-hidden="true">✓</span> Histórico de poupanças</li>
+              <li><span class="precos-card__check" aria-hidden="true">✓</span> Notificações de novas ofertas</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -952,7 +1553,9 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__top">
-        <a href="#top" class="logo" aria-label="Qupom — Início"><span>Q</span>upom</a>
+        <a href="#top" class="logo" aria-label="Qupom — Início">
+          <img class="logo__img logo__img--footer" src="assets/logo.png" alt="" width="130" height="30" decoding="async" />
+        </a>
         <nav class="footer__links" aria-label="Rodapé">
           <a href="#">Política de Privacidade</a>
           <span aria-hidden="true">|</span>
@@ -1057,6 +1660,42 @@
           el.classList.add("is-visible");
         });
       }
+    })();
+
+    (function () {
+      var section = document.getElementById("precos");
+      if (!section) return;
+      var premium = section.querySelector(".precos-card--premium");
+      if (!premium) return;
+      var btns = premium.querySelectorAll(".precos-toggle__opt");
+      var priceEl = document.getElementById("precosPremiumPrice");
+      var noteEl = document.getElementById("precosPremiumNote");
+      if (!priceEl || !noteEl) return;
+
+      function setPeriod(period) {
+        var isAnnual = period === "annual";
+        premium.classList.toggle("is-monthly", !isAnnual);
+        btns.forEach(function (b) {
+          var active = b.getAttribute("data-period") === period;
+          b.classList.toggle("is-active", active);
+          b.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+        if (isAnnual) {
+          priceEl.textContent = "19,99€/ano";
+          noteEl.removeAttribute("hidden");
+        } else {
+          priceEl.textContent = "1,99€/mês";
+          noteEl.setAttribute("hidden", "");
+        }
+      }
+
+      btns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setPeriod(btn.getAttribute("data-period"));
+        });
+      });
+
+      setPeriod("monthly");
     })();
   </script>
 </body>
